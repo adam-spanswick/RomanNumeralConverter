@@ -30,9 +30,7 @@ class RomanNumeralLookup:
         for c in numeral:
             if numeral[-1] is not "I" and numeral[-2] is "I":
                 number -= 1
-                print("Here2: " + str(number))
             number += self.lookup(c)
-            print("Here: " + str(number))
 
         return number
 
