@@ -28,10 +28,11 @@ class RomanNumeralLookup:
             return number
 
         for c in numeral:
+            if numeral[-1] is not "I" and numeral[-2] is "I":
+                number -= 1
+                print("Here2: " + str(number))
             number += self.lookup(c)
-
-        if numeral[-1] is not "I" and numeral[-2] is "I":
-            number -= 1
+            print("Here: " + str(number))
 
         return number
 
@@ -52,10 +53,11 @@ class Main:
           "      M = 1000\n")
     while True:
         romanNumeralToConvert = input("Input a Roman numeral: ")
+        romanNumeralToConvert.upper()
         if romanNumeralToConvert.lower() == exitMsg:
             break
 
-        individualNumerals = list(romanNumeralToConvert.capitalize())
+        individualNumerals = list(romanNumeralToConvert)
 
         for char in individualNumerals:
             if char in romanNumeralVals:
