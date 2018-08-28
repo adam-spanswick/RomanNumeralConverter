@@ -1,6 +1,8 @@
 # Adam Spanswick
 # This program takes a Roman numeral as a string and converts it to it's corresponding integer value.
 from typing import Dict
+from tkinter import *
+from PIL import Image, ImageTk
 
 romanNumeralVals: Dict[str, int] = {
     "I": 1,
@@ -37,6 +39,55 @@ class RomanNumeralLookup:
 
 
 class Main:
+    root = Tk()
+
+    top = Frame(root)
+    top.pack(side=LEFT)
+
+    bottom = Frame(root)
+    bottom.pack(side=BOTTOM)
+
+    line1 = Frame(top)
+    line1.pack()
+
+    line2 = Frame(top)
+    line2.pack()
+
+    numeralChart = Frame(root)
+    numeralChart.pack(side=RIGHT)
+
+    img = Image.open("romanNumerals.jpg")
+    render = ImageTk.PhotoImage(img)
+    imgLabel = Label(numeralChart, image=render)
+    imgLabel.pack()
+
+    root.title("Roman Numeral to Integer Converter")
+    screenwidth = root.winfo_screenwidth()
+    screenheight = root.winfo_screenheight()
+    x = screenwidth/3.8
+    y = screenheight/2.5
+    root.geometry(str(int(x)) + "x" + str(int(y)))
+
+    romanNumeralLabel = Label(line1, text="Enter a Roman Numeral:")
+    romanNumeralLabel.pack(pady=15, side=TOP)
+    romanNumeralIN = Entry(line1)
+    romanNumeralIN.focus_set()
+    romanNumeralIN.pack(pady=15, side=TOP)
+
+    intLabel = Label(line2, text="Integer Value:")
+    intLabel.pack(pady=15, side=TOP)
+    IntOut = Entry(line2, text="Integer Value")
+    IntOut.pack(pady=15, side=TOP)
+
+    submitButton = Button(bottom, text="Submit", padx=15, command=getText)
+    submitButton.pack(padx=5, pady=5)
+
+    def getText(self):
+        inputtxt = self.romanNumeralIN.get()
+        return inputtxt
+
+    root.mainloop()
+
     numLookup = RomanNumeralLookup()
     exitMsg = "exit"
     print("This program takes a Roman numeral as a string and converts it to it's corresponding integer value.\n"
@@ -52,6 +103,7 @@ class Main:
           "      M = 1000\n")
     while True:
         romanNumeralToConvert = input("Input a Roman numeral: ")
+        print(getText())
         if romanNumeralToConvert.lower() == exitMsg:
             break
 
