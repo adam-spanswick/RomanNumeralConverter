@@ -38,76 +38,25 @@ class RomanNumeralLookup:
         return number
 
 
-class Main:
-    root = Tk()
+window = Tk()
+window.geometry("400x400")
+window.title("Roman Numeral Converter")
+window.configure(background='gray')
+numeral = StringVar()
+integervalue = StringVar()
 
-    top = Frame(root)
-    top.pack(side=LEFT)
-
-    bottom = Frame(root)
-    bottom.pack(side=BOTTOM)
-
-    line1 = Frame(top)
-    line1.pack()
-
-    line2 = Frame(top)
-    line2.pack()
-
-    numeralChart = Frame(root)
-    numeralChart.pack(side=RIGHT)
-
-    img = Image.open("romanNumerals.jpg")
-    render = ImageTk.PhotoImage(img)
-    imgLabel = Label(numeralChart, image=render)
-    imgLabel.pack()
-
-    root.title("Roman Numeral to Integer Converter")
-    screenwidth = root.winfo_screenwidth()
-    screenheight = root.winfo_screenheight()
-    x = screenwidth/3.8
-    y = screenheight/2.5
-    root.geometry(str(int(x)) + "x" + str(int(y)))
-
-    romanNumeralLabel = Label(line1, text="Enter a Roman Numeral:")
-    romanNumeralLabel.pack(pady=15, side=TOP)
-    romanNumeralIN = Entry(line1)
-    romanNumeralIN.focus_set()
-    romanNumeralIN.pack(pady=15, side=TOP)
-
-    intLabel = Label(line2, text="Integer Value:")
-    intLabel.pack(pady=15, side=TOP)
-    IntOut = Entry(line2, text="Integer Value")
-    IntOut.pack(pady=15, side=TOP)
-
-    submitButton = Button(bottom, text="Submit", padx=15, command=getText)
-    submitButton.pack(padx=5, pady=5)
-
-    def getText(self):
-        inputtxt = self.romanNumeralIN.get()
-        return inputtxt
-
-    root.mainloop()
-
-    numLookup = RomanNumeralLookup()
+def get_numeral():
+    global inputNumeral
+    romanNumeralToConvert = inputNumeral.get()
     exitMsg = "exit"
-    print("This program takes a Roman numeral as a string and converts it to it's corresponding integer value.\n"
-          "Usage:\n"
-          "      When prompted enter a roman numeral, capital or lower case. To exit program enter: exit\n"
-          "Roman Numeral Values:\n"
-          "      I = 1\n"
-          "      V = 5\n"
-          "      X = 10\n"
-          "      L = 50\n"
-          "      C = 100\n"
-          "      D = 500\n"
-          "      M = 1000\n")
+
     while True:
-        romanNumeralToConvert = input("Input a Roman numeral: ")
-        print(getText())
         if romanNumeralToConvert.lower() == exitMsg:
             break
 
-        individualNumerals = list(romanNumeralToConvert.capitalize())
+        individualNumerals = list(romanNumeralToConvert)
+        individualNumerals = [element.upper() for element in individualNumerals]
+        print(individualNumerals)
 
         for char in individualNumerals:
             if char in romanNumeralVals:
@@ -115,4 +64,60 @@ class Main:
             else:
                 print("Input is not a roman numeral, see usage and re-enter a roman numeral.")
                 break
-        print(numLookup.convert(individualNumerals))
+        integerval = numLookup.convert(individualNumerals)
+        print(integerval)
+        break
+
+
+numLookup = RomanNumeralLookup()
+
+L1 = Label(window, text="Roman Numeral: ")
+L1.configure(background='gray')
+L2 = Label(window, text="Integer Value: ")
+L2.configure(background='gray')
+inputNumeral = Entry(window, bd=5, bg="white", textvariable=numeral, relief=FLAT)
+inputNumeral.configure(background='white')
+inputNumeral.focus_set()
+getText = Button(window, text="Submit", relief=FLAT, command=get_numeral)
+integerVal = Label(window, bg="gray", text=integervalue)
+img = ImageTk.PhotoImage(Image.open("romanNumerals.png"))
+pic = Label(window, image=img)
+
+L1.grid(row=0, column=0, pady=(15,15))
+inputNumeral.grid(row=0, column=1, pady=(15,15))
+L2.grid(row=2, column=0, pady=(15,15))
+integerVal.grid(row=2, column=1, pady=(15,15))
+pic.grid(row=6, column=1, pady=(15,15))
+getText.grid(row=4, column=1, pady=(15,15))
+
+window.mainloop()
+
+# numLookup = RomanNumeralLookup()
+# exitMsg = "exit"
+# print("This program takes a Roman numeral as a string and converts it to it's corresponding integer value.\n"
+#       "Usage:\n"
+#       "      When prompted enter a roman numeral, capital or lower case. To exit program enter: exit\n"
+#       "Roman Numeral Values:\n"
+#       "      I = 1\n"
+#       "      V = 5\n"
+#       "      X = 10\n"
+#       "      L = 50\n"
+#       "      C = 100\n"
+#       "      D = 500\n"
+#       "      M = 1000\n")
+# while True:
+#     romanNumeralToConvert = input("Input a Roman numeral: ")
+#     if romanNumeralToConvert.lower() == exitMsg:
+#         break
+#
+#     individualNumerals = list(romanNumeralToConvert)
+#     individualNumerals = [element.upper() for element in individualNumerals]
+#     print(individualNumerals)
+#
+#     for char in individualNumerals:
+#         if char in romanNumeralVals:
+#             continue
+#         else:
+#             print("Input is not a roman numeral, see usage and re-enter a roman numeral.")
+#             break
+#     print(numLookup.convert(individualNumerals))
