@@ -1,6 +1,5 @@
 # Adam Spanswick
 # This program takes a Roman numeral as a string and converts it to it's corresponding integer value.
-from tkinter import Tk
 from typing import Dict
 from tkinter import *
 from PIL import Image, ImageTk
@@ -58,7 +57,6 @@ def get_numeral():
 
         individual_numerals = list(roman_numeral_to_convert)
         individual_numerals = [element.upper() for element in individual_numerals]
-        print(individual_numerals)
 
         if len(individual_numerals) == 0:
             integer_val = 0
@@ -71,7 +69,6 @@ def get_numeral():
                 print("Input is not a roman numeral, see usage and re-enter a roman numeral.")
                 break
         integer_val = number_lookup.convert(individual_numerals)
-        print(integer_val)
         break
     font = ('times', 12, 'bold')
     L4 = Label(window, background="dark olive green", text=integer_val, font=font)
