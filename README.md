@@ -7,14 +7,7 @@ This program takes a Roman numeral as a string and converts it to it's correspon
 
 Usage:
 Enter a roman numeral in the text box, capital or lower case.
-Roman Numeral Values:
-I = 1
-V = 5
-X = 10
-L = 50
-C = 100
-D = 500
-M = 1000
+
 
 | Roman Numerals| Integers      |
 | ------------- |:-------------:|
